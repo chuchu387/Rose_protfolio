@@ -16,7 +16,7 @@ import { useTheme } from 'next-themes';
 function App() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean | null>(null); // Changed to null initially to indicate loading state
   const [isAdminDashboardOpen, setIsAdminDashboardOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { theme } = useTheme();
@@ -45,17 +45,24 @@ function App() {
         setIsAdminAuthenticated(JSON.parse(savedAdminAuth));
       } catch (e) {
         console.error('Failed to parse admin authentication state', e);
+        setIsAdminAuthenticated(false);
       }
+    } else {
+      // Default to false if no saved state
+      setIsAdminAuthenticated(false);
     }
   }, []);
 
   // Simulate initial loading - changed from 1500ms to 2000ms (2 seconds)
+  // But only after admin state has been initialized
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (isAdminAuthenticated !== null) { // Wait for admin state to be loaded
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isAdminAuthenticated]);
 
   // Save projects to localStorage when changed
   useEffect(() => {
@@ -71,29 +78,30 @@ function App() {
 
   // Save admin authentication state to localStorage when changed
   useEffect(() => {
-    try {
-      localStorage.setItem('admin-authenticated', JSON.stringify(isAdminAuthenticated));
-      console.log('Admin authentication state saved to localStorage:', isAdminAuthenticated);
-    } catch (e) {
-      console.error('Failed to save admin authentication state to localStorage', e);
-    }
-    
-    // Automatically open dashboard when authenticated
-    if (isAdminAuthenticated) {
-      setIsAdminDashboardOpen(true);
-    } else {
-      setIsAdminDashboardOpen(false);
+    if (isAdminAuthenticated !== null) { // Only run after initial load
+      try {
+        localStorage.setItem('admin-authenticated', JSON.stringify(isAdminAuthenticated));
+        console.log('Admin authentication state saved to localStorage:', isAdminAuthenticated);
+      } catch (e) {
+        console.error('Failed to save admin authentication state to localStorage', e);
+      }
+      
+      // Automatically open dashboard when authenticated
+      if (isAdminAuthenticated) {
+        setIsAdminDashboardOpen(true);
+      } else {
+        setIsAdminDashboardOpen(false);
+      }
     }
   }, [isAdminAuthenticated]);
 
   const handleAdminLogin = () => {
     setIsAdminAuthenticated(true);
-    setIsAdminLoginOpen(false);
+    setIsAdminLoginOpen(false); // Close the login modal after successful login
   };
 
   const handleAdminLogout = () => {
     setIsAdminAuthenticated(false);
-    setIsAdminDashboardOpen(false);
     toast.info('Logged out successfully');
   };
 
