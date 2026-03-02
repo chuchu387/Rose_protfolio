@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Environment variables
+.env.local
+.env
+
+# Logs
+*.log
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Next.js
+.next/
+out/
+
+# Temporary files
+tmp/
+temp/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Vite
+.svelte-kit/
+.c8
+
+# ESLint
+.eslintcache
+
+# VSCode
+.vscode/
