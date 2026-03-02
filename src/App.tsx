@@ -102,6 +102,7 @@ function App() {
 
   const handleAdminLogout = () => {
     setIsAdminAuthenticated(false);
+    setIsAdminDashboardOpen(false);
     toast.info('Logged out successfully');
   };
 
@@ -187,8 +188,19 @@ function App() {
       {/* Grain Overlay */}
       <div className="grain-overlay" />
 
-      {/* Navigation */}
-      <Navigation onAdminClick={() => setIsAdminLoginOpen(true)} />
+      {/* Navigation - Pass the authentication status */}
+      <Navigation 
+        onAdminClick={() => {
+          if (isAdminAuthenticated) {
+            // If already authenticated, open the dashboard directly
+            setIsAdminDashboardOpen(true);
+          } else {
+            // Otherwise, open the login modal
+            setIsAdminLoginOpen(true);
+          }
+        }}
+        isAdminAuthenticated={isAdminAuthenticated}
+      />
 
       {/* Main Content */}
       <main className="relative">
@@ -201,7 +213,7 @@ function App() {
 
       {/* Admin Login Modal */}
       <AnimatePresence>
-        {isAdminLoginOpen && (
+        {isAdminLoginOpen && !isAdminAuthenticated && (
           <AdminLogin
             isOpen={isAdminLoginOpen}
             onClose={() => setIsAdminLoginOpen(false)}
@@ -212,7 +224,7 @@ function App() {
 
       {/* Admin Dashboard */}
       <AnimatePresence>
-        {isAdminDashboardOpen && (
+        {isAdminDashboardOpen && isAdminAuthenticated && (
           <AdminDashboard
             isOpen={isAdminDashboardOpen}
             onClose={() => setIsAdminDashboardOpen(false)}

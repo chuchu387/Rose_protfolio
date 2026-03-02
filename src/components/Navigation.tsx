@@ -5,9 +5,10 @@ import { useTheme } from 'next-themes';
 
 interface NavigationProps {
   onAdminClick: () => void;
+  isAdminAuthenticated: boolean | null; // Added prop to track admin authentication status
 }
 
-export default function Navigation({ onAdminClick }: NavigationProps) {
+export default function Navigation({ onAdminClick, isAdminAuthenticated }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -101,14 +102,14 @@ export default function Navigation({ onAdminClick }: NavigationProps) {
             {theme === 'dark' ? 'Light' : 'Dark'}
           </button>
           
-          {/* Admin Button */}
+          {/* Admin Button - Conditionally display based on authentication status */}
           <div className="w-px h-6 bg-black/10 mx-2" />
           <button
             onClick={onAdminClick}
             className="px-3 py-2 font-sans text-[10px] tracking-wider uppercase text-gray-400 hover:text-magenta transition-colors flex items-center gap-1"
           >
             <Lock className="w-3 h-3" />
-            Admin
+            {isAdminAuthenticated ? 'Admin Dashboard' : 'Admin'}
           </button>
         </div>
       </motion.nav>
@@ -188,7 +189,7 @@ export default function Navigation({ onAdminClick }: NavigationProps) {
                   className="font-sans text-xs tracking-wider uppercase text-gray-500 hover:text-black transition-colors flex items-center gap-2"
                 >
                   <Lock className="w-4 h-4" />
-                  Admin Login
+                  {isAdminAuthenticated ? 'Admin Dashboard' : 'Admin Login'}
                 </button>
               </div>
             </div>
