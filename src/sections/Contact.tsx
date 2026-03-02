@@ -29,7 +29,14 @@ export default function Contact({ onHireClick }: ContactProps) {
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
-      toast.error('Email configuration is incomplete. Please check your environment variables.');
+      toast.error(
+        'Email configuration is incomplete. Please check your environment variables.\n\n' +
+        'Required variables:\n' +
+        '- VITE_EMAILJS_SERVICE_ID\n' +
+        '- VITE_EMAILJS_TEMPLATE_ID\n' +
+        '- VITE_EMAILJS_PUBLIC_KEY\n\n' +
+        'Please contact the site administrator to configure these settings.'
+      );
       setIsSubmitting(false);
       return;
     }
