@@ -1,8 +1,11 @@
+/* Disable unknown at rules warnings for Tailwind directives */
+/* csslint ignore:start */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* csslint ignore:end */
 
 @layer base {
   :root {
@@ -52,9 +55,11 @@
 }
 
 @layer base {
+  /* csslint ignore:start */
   * {
     @apply border-border;
   }
+  /* csslint ignore:end */
   
   html {
     scroll-behavior: smooth;
@@ -103,7 +108,7 @@
   }
   
   .btn-primary:hover {
-    @apply bg-black dark:bg-white;
+    @apply bg-black text-white dark:bg-white dark:text-black;
   }
   
   .btn-outline {

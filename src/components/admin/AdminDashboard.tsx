@@ -205,7 +205,7 @@ export default function AdminDashboard({
             </button>
             <button
               onClick={handleClose}
-              className="w-10 h-10 border border-black/20 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+              className="w-10 h-10 bg-[#D9004C] flex items-center justify-center text-white"
             >
               <X className="w-5 h-5" />
             </button>
