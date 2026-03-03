@@ -19,21 +19,17 @@ export default function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Retrieve credentials from environment variables
     const adminEmail = import.meta.env.VITE_ADMIN_EMAIL;
     const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD;
 
-    // Check if environment variables are set
     if (!adminEmail || !adminPassword) {
       setIsLoading(false);
       toast.error('Admin credentials are not configured');
       return;
     }
 
-    // Simple authentication (in production, use proper backend auth)
     if (email === adminEmail && password === adminPassword) {
       toast.success('Welcome back!');
       onLogin();
@@ -56,7 +52,7 @@ export default function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps
       className="fixed inset-0 z-[300] flex items-center justify-center p-4"
     >
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         onClick={onClose}
       />
@@ -72,7 +68,7 @@ export default function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-10 h-10 border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors z-10"
+          className="absolute top-4 right-4 w-10 h-10 border border-black/10 flex items-center justify-center bg-red-600 text-white hover:bg-black hover:text-white transition-colors z-10"
         >
           <X className="w-5 h-5" />
         </button>
@@ -93,6 +89,7 @@ export default function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Email */}
             <div>
               <label className="font-sans text-xs tracking-wider uppercase text-gray-500 block mb-2">
                 Email
@@ -104,12 +101,13 @@ export default function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full pl-12 pr-4 py-4 border border-black/20 font-sans focus:outline-none focus:border-black transition-colors"
+                  className="w-full pl-12 pr-4 py-4 border border-black/20 font-sans focus:outline-none focus:ring-0 focus:border-black/20 transition-colors"
                   placeholder="admin@example.com"
                 />
               </div>
             </div>
 
+            {/* Password */}
             <div>
               <label className="font-sans text-xs tracking-wider uppercase text-gray-500 block mb-2">
                 Password
@@ -121,7 +119,7 @@ export default function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full pl-12 pr-12 py-4 border border-black/20 font-sans focus:outline-none focus:border-black transition-colors"
+                  className="w-full pl-12 pr-12 py-4 border border-black/20 font-sans focus:outline-none focus:ring-0 focus:border-black/20 transition-colors"
                   placeholder="••••••••"
                 />
                 <button
@@ -129,15 +127,20 @@ export default function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
                 </button>
               </div>
             </div>
 
+            {/* Submit */}
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed !bg-[#D9004C] hover:!bg-black hover:!text-white"
             >
               {isLoading ? (
                 <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -147,12 +150,7 @@ export default function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps
             </button>
           </form>
 
-          {/* Security notice instead of showing credentials */}
-          <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200">
-            <p className="font-sans text-xs text-yellow-700 text-center">
-        
-            </p>
-          </div>
+          {/* Security Notice */}
         </div>
       </motion.div>
     </motion.div>

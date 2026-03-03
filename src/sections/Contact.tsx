@@ -259,8 +259,7 @@ export default function Contact({ onHireClick }: ContactProps) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-8 py-4 bg-[#D9004C] text-white font-sans text-sm tracking-widest uppercase transition-all duration-300 hover:bg-black dark:hover:bg-white flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
-                >
+                  className="px-8 py-4 bg-[#D9004C] text-white font-sans text-sm tracking-widest uppercase transition-all duration-300 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto">
                   {isSubmitting ? (
                     <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : (

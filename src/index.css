@@ -5,6 +5,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Remove empty layer declarations that cause the error */
+
 /* csslint ignore:end */
 
 @layer base {
@@ -65,11 +68,13 @@
     scroll-behavior: smooth;
   }
   
+  /* csslint ignore:start */
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
   }
+  /* csslint ignore:end */
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
@@ -111,12 +116,29 @@
     @apply bg-black text-white dark:bg-white dark:text-black;
   }
   
+  /* Override for admin sign-in button hover */
+  button[type="submit"].btn-primary:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+  
   .btn-outline {
     @apply px-8 py-4 border border-black dark:border-white text-black dark:text-white font-sans text-sm tracking-widest uppercase transition-all duration-300;
   }
   
   .btn-outline:hover {
     @apply bg-black text-white dark:bg-white dark:text-black;
+  }
+  
+  /* Specific styles for admin dashboard close button */
+  .admin-dashboard-close-btn {
+    background-color: #D9004C !important;
+    color: #fff !important;
+  }
+  
+  .admin-dashboard-close-btn:hover {
+    background-color: #D9004C !important; /* Maintain red color on hover */
+    color: #fff !important; /* Maintain white text on hover */
   }
   
   .nav-link {

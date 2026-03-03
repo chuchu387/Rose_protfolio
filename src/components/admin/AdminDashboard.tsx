@@ -205,7 +205,7 @@ export default function AdminDashboard({
             </button>
             <button
               onClick={handleClose}
-              className="w-10 h-10 bg-[#D9004C] flex items-center justify-center text-white"
+              className="w-10 h-10 admin-dashboard-close-btn flex items-center justify-center"
             >
               <X className="w-5 h-5" />
             </button>
