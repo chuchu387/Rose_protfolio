@@ -185,23 +185,23 @@ export default function AdminDashboard({
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: '100%' }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute right-0 top-0 h-full w-full max-w-2xl bg-white overflow-hidden flex flex-col"
+        className="absolute right-0 top-0 h-full w-full max-w-2xl bg-white dark:bg-black overflow-hidden flex flex-col"
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-black/10">
+        <div className="flex items-center justify-between p-6 border-b border-black/10 dark:border-white/20">
           <div>
-            <h2 className="font-serif text-2xl text-black">Admin Dashboard</h2>
-            <p className="font-sans text-xs text-gray-500 mt-1">
+            <h2 className="font-serif text-2xl text-black dark:text-white">Admin Dashboard</h2>
+            <p className="font-sans text-xs text-gray-500 dark:text-gray-400 mt-1">
               Manage your portfolio content
             </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={onLogout}
-              className="flex items-center gap-2 px-4 py-2 border border-black/20 font-sans text-xs tracking-wider uppercase hover:bg-black hover:text-white transition-colors"
+              className="flex items-center gap-2 px-4 py-2 border border-black dark:border-white font-sans text-xs tracking-wider uppercase text-black dark:text-white hover:bg-black hover:text-white transition-colors"
             >
-              <LogOut className="w-4 h-4" />
-              Logout
+              <LogOut className="w-4 h-4 text-black dark:text-white" />
+              <span className="text-black dark:text-white">Logout</span>
             </button>
             <button
               onClick={handleClose}
@@ -213,7 +213,7 @@ export default function AdminDashboard({
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-black/10">
+        <div className="flex border-b border-black/10 dark:border-white/20">
           <button
             onClick={() => {
               setActiveTab('projects');
@@ -222,7 +222,7 @@ export default function AdminDashboard({
             className={`flex-1 py-4 font-sans text-xs tracking-wider uppercase transition-colors ${
               activeTab === 'projects' 
                 ? 'bg-black text-white' 
-                : 'text-gray-500 hover:text-black'
+                : 'text-gray-500 dark:text-white hover:text-black dark:hover:bg-red-600 dark:hover:text-white'
             }`}
           >
             All Projects ({projects.length})
@@ -232,7 +232,7 @@ export default function AdminDashboard({
             className={`flex-1 py-4 font-sans text-xs tracking-wider uppercase transition-colors ${
               activeTab === 'add' 
                 ? 'bg-black text-white' 
-                : 'text-gray-500 hover:text-black'
+                : 'text-gray-500 dark:text-white hover:text-black dark:hover:bg-red-600 dark:hover:text-white'
             }`}
           >
             {editingProject ? 'Edit Project' : 'Add New'}
@@ -252,8 +252,8 @@ export default function AdminDashboard({
               >
                 {projects.length === 0 ? (
                   <div className="text-center py-12">
-                    <ImageIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-                    <p className="font-sans text-gray-500">No projects yet</p>
+                    <ImageIcon className="w-12 h-12 text-gray-300 dark:text-gray-400 mx-auto mb-4" />
+                    <p className="font-sans text-gray-500 dark:text-gray-400">No projects yet</p>
                     <button
                       onClick={() => setActiveTab('add')}
                       className="mt-4 text-magenta font-sans text-sm hover:underline"
@@ -268,7 +268,7 @@ export default function AdminDashboard({
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.05 }}
-                      className="flex gap-4 p-4 border border-black/10 hover:border-black/30 transition-colors group"
+                      className="flex gap-4 p-4 border border-black/10 dark:border-white/20 hover:border-black/30 dark:hover:border-white/30 transition-colors group"
                     >
                       <div className="w-24 h-24 flex-shrink-0 overflow-hidden">
                         <img
@@ -280,31 +280,31 @@ export default function AdminDashboard({
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <div>
-                            <span className="font-sans text-[10px] tracking-wider uppercase text-gray-500">
+                            <span className="font-sans text-[10px] tracking-wider uppercase text-gray-500 dark:text-gray-400">
                               {project.category}
                             </span>
-                            <h3 className="font-serif text-lg text-black truncate">
+                            <h3 className="font-serif text-lg text-black dark:text-white truncate">
                               {project.title}
                             </h3>
                           </div>
                           <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                             <button
                               onClick={() => handleEdit(project)}
-                              className="w-8 h-8 border border-black/20 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+                              className="w-8 h-8 border border-black dark:border-white text-black dark:text-white flex items-center justify-center hover:bg-black hover:text-white transition-colors"
                               aria-label="Edit project"
                             >
-                              <Edit2 className="w-4 h-4" />
+                              <Edit2 className="w-4 h-4 text-black dark:text-white" />
                             </button>
                             <button
                               onClick={() => handleDelete(project.id)}
-                              className="w-8 h-8 border border-black/20 flex items-center justify-center hover:bg-magenta hover:border-magenta hover:text-white transition-colors"
+                              className="w-8 h-8 border border-black dark:border-white text-black dark:text-white flex items-center justify-center hover:bg-magenta hover:border-magenta hover:text-white transition-colors"
                               aria-label="Delete project"
                             >
-                              <Trash2 className="w-4 h-4" />
+                              <Trash2 className="w-4 h-4 text-black dark:text-white" />
                             </button>
                           </div>
                         </div>
-                        <p className="font-sans text-sm text-gray-500 line-clamp-2 mt-1">
+                        <p className="font-sans text-sm text-gray-500 dark:text-gray-400 line-clamp-2 mt-1">
                           {project.description}
                         </p>
                       </div>
@@ -390,13 +390,13 @@ export default function AdminDashboard({
 
                 {/* Category */}
                 <div>
-                  <label className="font-sans text-xs tracking-wider uppercase text-gray-500 block mb-2">
+                  <label className="font-sans text-xs tracking-wider uppercase text-gray-500 dark:text-gray-400 block mb-2">
                     Category
                   </label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                    className="w-full px-4 py-3 border border-black/20 font-sans focus:outline-none focus:border-black transition-colors bg-white"
+                    className="w-full px-4 py-3 border border-black/20 dark:border-white/20 font-sans focus:outline-none focus:border-black transition-colors bg-white dark:bg-black dark:text-white"
                   >
                     {allCategories.map(cat => (
                       <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
