@@ -65,7 +65,7 @@ export default function Navigation({ onAdminClick, isAdminAuthenticated }: Navig
           opacity: isScrolled ? 1 : 0 
         }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-[100]"
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] lg:block hidden"
       >
         <div className="bg-white/90 backdrop-blur-md border border-black/10 px-2 py-2 shadow-lg flex items-center">
           <ul className="flex items-center gap-1">
@@ -119,9 +119,9 @@ export default function Navigation({ onAdminClick, isAdminAuthenticated }: Navig
         initial={{ opacity: 0 }}
         animate={{ opacity: isScrolled ? 1 : 0 }}
         onClick={() => setIsMobileMenuOpen(true)}
-        className="fixed top-6 right-6 z-[100] w-12 h-12 bg-white/90 backdrop-blur-md border border-black/10 flex items-center justify-center shadow-lg lg:hidden"
+        className="fixed top-6 right-6 z-[100] w-12 h-12 bg-magenta backdrop-blur-md border border-black/10 flex items-center justify-center shadow-lg lg:hidden"
       >
-        <Menu className="w-5 h-5" />
+        <Menu className="w-5 h-5 text-white" />
       </motion.button>
 
       {/* Mobile Menu */}
@@ -136,12 +136,12 @@ export default function Navigation({ onAdminClick, isAdminAuthenticated }: Navig
           >
             <div className="flex flex-col h-full p-8">
               <div className="flex justify-between items-center mb-12">
-                <span className="font-serif text-2xl">Roji Maharjan</span>
+                <span className="font-serif text-2xl text-black dark:text-black">Roji Maharjan</span>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-12 h-12 border border-black flex items-center justify-center"
+                  className="w-12 h-12 border border-black flex items-center justify-center bg-black"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5 text-white" />
                 </button>
               </div>
 

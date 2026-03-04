@@ -6,8 +6,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Remove empty layer declarations that cause the error */
+/* Custom scrollbar styling */
+/* csslint ignore:start */
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  
+  /* Specific styling for scrollable areas */
+  .scrollable-category-container {
+    overflow-x: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .scrollable-category-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
 
+/* Custom CSS rules */
+@layer utilities {
+  .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+  }
+  
+  .py-12 {
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+  }
+  
+  .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .pb-2 {
+    padding-bottom: 1.5rem;
+  }
+  
+  .grid-cols-1 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 /* csslint ignore:end */
 
 @layer base {
@@ -206,3 +252,5 @@ html.lenis {
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
+
+

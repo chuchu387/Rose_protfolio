@@ -64,30 +64,32 @@ export default function Gallery({ projects }: GalleryProps) {
             </h2>
           </motion.div>
 
-          {/* Category Filter Buttons */}
+          {/* Category Filter Buttons - Scrollable Container */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap gap-2 mb-8"
+            className="mb-8 scrollable-category-container pb-2"
           >
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 font-sans text-xs tracking-wider uppercase transition-colors ${
-                  selectedCategory === category
-                    ? 'bg-black dark:bg-white dark:text-black text-white'
-                    : 'border border-black/20 dark:border-white/20 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+            <div className="flex gap-2 min-w-max">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 font-sans text-xs tracking-wider uppercase transition-colors whitespace-nowrap ${
+                    selectedCategory === category
+                      ? 'bg-black dark:bg-white dark:text-black text-white'
+                      : 'border border-black/20 dark:border-white/20 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </motion.div>
 
           {/* Gallery Grid - Standard Responsive Grid Layout */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[70vh] overflow-y-auto pr-2 hide-scrollbar">
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id || index} 
